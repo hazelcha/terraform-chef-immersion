@@ -1,8 +1,7 @@
-variable "vpc_cidr" {
-  type        = string
-  default     = "10.0.0.0/16"
-  description = "VPC cidr block"
-}
+#-----------------root/variables.tf-----------------
+
+#-----------------provider variables-----------------
+
 variable "region" {
   type    = string
   default = "us-east-1"
@@ -13,19 +12,23 @@ variable "accounts" {
   description = "List of allowed AWS account IDs to prevent you from mistakenly using an incorrect one"
 }
 
+#-----------------network variables-----------------
+
+variable "vpc_cidr" {
+  default = "10.0.0.0/16"
+}
+
 variable "pub_subnets" {
-  type        = list
-  default     = ["10.0.1.0/24", "10.0.2.0/24"]
-  description = "list of subnet CIDRs"
+  default = ["10.0.1.0/24", "10.0.2.0/24"]
 }
 
 variable "subnet_count" {
-  type        = number
-  default     = 2
-  description = "number of subnets required to deploy a chef server and nodes"
+  default = 2
 }
 
-variable "node_count" {
-  type        = number
-  description = "number of nodes required"
-}
+#-----------------ec2 variables-----------------
+variable "main_node_count" {}
+
+# variable "subnet_1" {}
+
+# variable "subnet_2" {}
