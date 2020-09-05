@@ -1,0 +1,25 @@
+# required
+cred_path = "path/to/aws/credentials"
+
+#required
+profile = "name of AWS profile"
+
+#optional - default is 10.0.0.0/16
+vpc_cidr = "VPC CIDR block"
+
+#optional - default is us-east-1
+region = "region to deploy infrastructure"
+
+#required
+accounts = [
+  "account # to deploy infrastructure"
+]
+
+#optional - default is "10.0.1.0/24", "10.0.2.0/24"
+pub_subnets = [list of subnets within VPC cidr range]
+
+#optional - default is 2
+subnet_count = 2
+
+#required
+node_count = number of chef nodes to deploy
