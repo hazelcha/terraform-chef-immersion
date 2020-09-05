@@ -1,7 +1,7 @@
-variable "vpc_cider" {
-type = string
-default = "10.0.0.0/16"
-description = "VPC cidr block"
+variable "vpc_cidr" {
+  type        = string
+  default     = "10.0.0.0/16"
+  description = "VPC cidr block"
 }
 variable "region" {
   type    = string
@@ -15,13 +15,13 @@ variable "accounts" {
 
 variable "pub_subnets" {
   type        = list
-    default = ["10.0.1.0/24", "10.0.2.0/24"]
+  default     = ["10.0.1.0/24", "10.0.2.0/24"]
   description = "list of subnet CIDRs"
 }
 
 variable "subnet_count" {
   type        = number
-  default = 2
+  default     = 2
   description = "number of subnets required to deploy a chef server and nodes"
 }
 
