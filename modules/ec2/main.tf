@@ -33,6 +33,7 @@ resource "aws_instance" "chef_server" {
  subnet_id              = var.chef_server_subnet_id
 #  vpc_security_group_ids = [aws_security_group.chef_sg.id]
  key_name               = aws_key_pair.instance_ssh.key_name
+ user_data = file("${path.module}/../../files/bootstrap-chef-server.sh")
 
  tags = merge({
    Name = "chef-server"
