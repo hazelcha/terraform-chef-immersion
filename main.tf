@@ -18,15 +18,14 @@ provider "aws" {
 }
 
 module "network" {
-  source       = "./modules/network"
-  vpc_cidr     = var.vpc_cidr
-  pub_subnets  = var.pub_subnets
-  subnet_count = var.subnet_count
+  source      = "./modules/network"
+  vpc_cidr    = var.vpc_cidr
+  pub_subnets = var.pub_subnets
 }
 
 module "ec2" {
   source                = "./modules/ec2"
-  node_count            = var.main_node_count
+  node_count            = var.node_count
   chef_server_subnet_id = module.network.chef_server_subnet_id
   chef_nodes_subnet_id  = module.network.chef_nodes_subnet_id
 }

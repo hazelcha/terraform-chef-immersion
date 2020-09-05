@@ -26,7 +26,7 @@ resource "aws_internet_gateway" "chef_gw" {
 }
 
 resource "aws_subnet" "chef_subnets" {
-  count                   = var.subnet_count
+  count                   = 2
   vpc_id                  = aws_vpc.chef_vpc.id
   cidr_block              = var.pub_subnets[count.index]
   map_public_ip_on_launch = true

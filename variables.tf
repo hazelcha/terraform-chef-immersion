@@ -22,9 +22,5 @@ variable "pub_subnets" {
   default = ["10.0.1.0/24", "10.0.2.0/24"]
 }
 
-variable "subnet_count" {
-  default = 2
-}
-
 #-----------------ec2 variables-----------------
-variable "main_node_count" {}
+variable "node_count" {}
