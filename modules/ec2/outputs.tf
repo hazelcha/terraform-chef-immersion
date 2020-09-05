@@ -4,6 +4,6 @@ output "chef_server_url" {
   value = aws_instance.chef_server.public_dns
 }
 
-# output "chef_server_public_ip" {
-#   value = aws_eip.chef_server_eip.public_ip
-# }
+output "chef_server_public_ip" {
+  value = aws_eip.chef_server_eip.public_ip
+}

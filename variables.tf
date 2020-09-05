@@ -28,7 +28,3 @@ variable "subnet_count" {
 
 #-----------------ec2 variables-----------------
 variable "main_node_count" {}
-
-# variable "subnet_1" {}
-
-# variable "subnet_2" {}
