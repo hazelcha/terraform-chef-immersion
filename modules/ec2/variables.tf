@@ -8,3 +8,5 @@ variable "node_count" {
 variable "chef_server_subnet_id" {}
 
 variable "chef_nodes_subnet_id" {}
+
+variable "chef_sg" {}

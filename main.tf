@@ -7,6 +7,10 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 3.5.0"
     }
+    null = {
+      source  = "hashicorp/null"
+      version = "~> 2.1.2"
+    }
   }
 }
 
@@ -28,43 +32,10 @@ module "ec2" {
   node_count            = var.node_count
   chef_server_subnet_id = module.network.chef_server_subnet_id
   chef_nodes_subnet_id  = module.network.chef_nodes_subnet_id
+  chef_sg               = module.security.sg_id
 }
 
-#resource "aws_security_group" "chef_sg" {
-#  name        = "chef_sg"
-#  description = "Allowed ports for Chef"
-#  vpc_id      = module.network.chef_vpc.id
-#
-#  ingress {
-#    description = "SSH access"
-#    from_port   = 22
-#    to_port     = 22
-#    protocol    = "tcp"
-#    cidr_blocks = ["0.0.0.0/0"]
-#  }
-#
-#  ingress {
-#    description = "TLS for chef server"
-#    from_port   = 443
-#    to_port     = 443
-#    protocol    = "tcp"
-#    cidr_blocks = ["0.0.0.0/0"]
-#  }
-#
-#  ingress {
-#    description = "http for chef server"
-#    from_port   = 80
-#    to_port     = 80
-#    protocol    = "tcp"
-#    cidr_blocks = ["0.0.0.0/0"]
-#  }
-#
-#  egress {
-#    from_port   = 0
-#    to_port     = 0
-#    protocol    = "-1"
-#    cidr_blocks = ["0.0.0.0/0"]
-#  }
-#
-#  tags = local.common_tags
-#}
+module "security" {
+  source = "./modules/security"
+  vpc_id = module.network.chef_vpc_id
+}

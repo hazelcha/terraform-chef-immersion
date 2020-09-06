@@ -35,8 +35,8 @@ if [ ! $(which chef-server-ctl) ]; then
   while (curl http://localhost:8000/_status) | grep "fail"; do sleep 15s; done
 
   echo "Creating initial user and organization..." >> chef-server-install.txt
-  chef-server-ctl user-create chefadmin Chef Admin admin@4thcoffee.com insecurepassword --filename /drop/chefadmin.pem
-  chef-server-ctl org-create 4thcoffee "Fourth Coffee, Inc." --association_user chefadmin --filename 4thcoffee-validator.pem
+  chef-server-ctl user-create chefadmin Chef Admin admin@hizzleinc.com insecurepassword --filename /drop/chefadmin.pem
+  chef-server-ctl org-create hizzleinc "Hizzle, Inc." --association_user chefadmin --filename hizzleinc-validator.pem
 fi
 
 echo "Your Chef server is ready!" >> chef-server-install.txt
