@@ -29,7 +29,7 @@ override.tf.json
 # example: *tfplan*
 
 # exclude everything
-ssh-keys/*
+chef-files/*
 
 # exception to the rule
-!ssh-keys/.gitkeep 
+!chef-files/.gitkeep 
