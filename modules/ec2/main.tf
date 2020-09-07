@@ -8,7 +8,7 @@ locals {
 
 resource "aws_key_pair" "instance_ssh" {
  key_name   = "chef-immersion"
- public_key = file("${path.module}/../../ssh-keys/chef-immersion.pub")
+ public_key = file("${path.module}/../../chef-files/chef-immersion.pub")
 }
 
 data "aws_ami" "ubuntu" {
@@ -30,7 +30,7 @@ data "aws_ami" "ubuntu" {
 resource "aws_instance" "chef_server" {
 # depends_on = [aws_eip.chef_server_eip]
  ami                    = data.aws_ami.ubuntu.id
- instance_type          = "t2.medium"
+ instance_type          = "t3.small"
  subnet_id              = var.chef_server_subnet_id
  vpc_security_group_ids = var.chef_sg
  key_name               = aws_key_pair.instance_ssh.key_name
@@ -45,7 +45,7 @@ resource "aws_instance" "chef_server" {
 # resource "null_resource" "get_client_key" {
 # depends_on = [aws_instance.chef_server]
 # provisioner "local-exec" {
-#   command = "scp -i ./ssh-keys/chef-immersion ubuntu@${aws_instance.chef_server.public_ip}:/drop/chefadmin.pem ./ssh-keys/"
+#   command = "scp -i ./chef-files/chef-immersion ubuntu@${aws_instance.chef_server.public_ip}:/drop/chefadmin.pem ./chef-files/"
 # }
   
 # }
@@ -69,7 +69,7 @@ resource "aws_eip" "chef_server_eip" {
  instance   = aws_instance.chef_server.id
 
   provisioner "local-exec" {
-    command = "echo 'current_dir = File.dirname(__FILE__)\nlog_level :info\nlog_location STDOUT\nnode_name \"chefadmin\"\nclient_key \"#{current_dir}/chefadmin.pem\"\nknife[:editor]=\"/usr/bin/vim\" \nchef_server_url \"https://${aws_eip.chef_server_eip.public_dns}/organizations/hizzleinc\"' >> ./ssh-keys/knife.rb"
+    command = "echo 'current_dir = File.dirname(__FILE__)\nlog_level :info\nlog_location STDOUT\nnode_name \"chefadmin\"\nclient_key \"#{current_dir}/chefadmin.pem\"\nknife[:editor]=\"/usr/bin/vim\" \nchef_server_url \"https://${aws_eip.chef_server_eip.public_dns}/organizations/hizzleinc\"' > ./chef-files/knife.rb"
   }
 
  tags = local.common_tags
