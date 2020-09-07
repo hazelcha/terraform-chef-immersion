@@ -1,4 +1,5 @@
 #cloud-config
+output: { all: '| tee -a /var/log/cloud-init-output.log' }
 write_files:
   - path: /update-hostname.sh
     permissions: 0744
@@ -71,3 +72,4 @@ write_files:
 runcmd:
   - bash /update-hostname.sh
   - bash /bootstrap-chef-server.sh
+final_message: "Your Chef server is ready!"
