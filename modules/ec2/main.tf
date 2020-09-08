@@ -70,9 +70,4 @@ resource "aws_eip" "chef_server_eip" {
 resource "aws_eip_association" "eip_assoc" {
   instance_id   = aws_instance.chef_server.id
   allocation_id = aws_eip.chef_server_eip.id
-
-  provisioner "local-exec" {
-    command = "echo 'Download the chef client key by running \"scp -i ./chef-files/chef-immersion ubuntu@${aws_eip.chef_server_eip.public_ip}:/drop/chefadmin.pem ./chef-files/\"'"
-
-  }
 }

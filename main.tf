@@ -39,3 +39,24 @@ module "security" {
   source = "./modules/security"
   vpc_id = module.network.chef_vpc_id
 }
+
+resource "null_resource" "example_provisioner" {
+  triggers = {
+    chef_instance = module.ec2.chef_server_id
+  }
+
+  connection {
+    type        = "ssh"
+    host        = module.ec2.chef_server_public_ip
+    user        = "ubuntu"
+    private_key = file("${path.module}/chef-files/chef-immersion")
+  }
+
+  provisioner "remote-exec" {
+    script = "bin/wait-for-bootstrap.sh"
+  }
+
+  provisioner "local-exec" {
+    command = "scp -i ./chef-files/chef-immersion ubuntu@${module.ec2.chef_server_public_ip}:/drop/chefadmin.pem ./chef-files/"
+  }
+}

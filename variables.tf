@@ -15,12 +15,16 @@ variable "accounts" {
 #-----------------network variables-----------------
 
 variable "vpc_cidr" {
-  default = "10.0.0.0/16"
+  default     = "10.0.0.0/16"
+  description = "VPC cidr block"
 }
 
 variable "pub_subnets" {
-  default = ["10.0.1.0/24", "10.0.2.0/24"]
+  default     = ["10.0.1.0/24", "10.0.2.0/24"]
+  description = "list of subnet CIDRs"
 }
 
 #-----------------ec2 variables-----------------
-variable "node_count" {}
+variable "node_count" {
+  description = "number of chef nodes to deploy"
+}
