@@ -7,7 +7,7 @@ cred_path = "path/to/aws/credentials"
 profile = "name of AWS profile"
 
 #optional - default is us-east-1
-region = "region to deploy infrastructure"
+#region = "region to deploy infrastructure"
 
 #required
 accounts = [
@@ -18,10 +18,10 @@ accounts = [
 #-----------------network variables-----------------
 
 #optional - default is 10.0.0.0/16
-vpc_cidr = "VPC CIDR block"
+#vpc_cidr = "VPC CIDR block"
 
 #optional - default is "10.0.1.0/24", "10.0.2.0/24"
-pub_subnets = [list of subnets within VPC cidr range]
+#pub_subnets = [list of subnets within VPC cidr range]
 
 
 #-----------------ec2 variables-----------------
