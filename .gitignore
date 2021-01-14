@@ -33,3 +33,4 @@ chef-files/*
 
 # exception to the rule
 !chef-files/.gitkeep 
+!chef-files/Berksfile
