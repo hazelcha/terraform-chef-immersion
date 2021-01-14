@@ -8,7 +8,7 @@ variable "region" {
 }
 
 variable "accounts" {
-  type        = list
+  type        = list(number)
   description = "List of allowed AWS account IDs to prevent you from mistakenly using an incorrect one"
 }
 
