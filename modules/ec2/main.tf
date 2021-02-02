@@ -61,7 +61,7 @@ resource "aws_eip" "chef_server_eip" {
   instance = aws_instance.chef_server.id
 
   provisioner "local-exec" {
-    command = "echo 'current_dir = File.dirname(__FILE__)\nlog_level :info\nlog_location STDOUT\nnode_name \"chefadmin\"\nclient_key \"#{current_dir}/chefadmin.pem\"\nknife[:editor]=\"/usr/bin/vim\" \nchef_server_url \"https://${aws_eip.chef_server_eip.public_dns}/organizations/hizzleinc\"' > ./chef-files/knife.rb"
+    command = "echo 'current_dir = File.dirname(__FILE__)\nlog_level :info\nlog_location STDOUT\nnode_name \"chefadmin\"\nclient_key \"#{current_dir}/chefadmin.pem\"\ncookbook_path [\"./cookbooks\"]\nknife[:editor]=\"/usr/bin/vim\" \nchef_server_url \"https://${aws_eip.chef_server_eip.public_dns}/organizations/hizzleinc\"' > ./chef-files/knife.rb"
   }
 
   tags = local.common_tags
