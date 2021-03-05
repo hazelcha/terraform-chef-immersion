@@ -40,7 +40,7 @@ module "security" {
   vpc_id = module.network.chef_vpc_id
 }
 
-resource "null_resource" "example_provisioner" {
+resource "null_resource" "get_chefuser_key" {
   triggers = {
     chef_instance = module.ec2.chef_server_id
   }
